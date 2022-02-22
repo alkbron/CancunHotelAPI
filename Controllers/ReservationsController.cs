@@ -80,6 +80,16 @@ namespace CancunHotelAPI.Controllers
                 return this.BadRequest();
             }
 
+            List<Reservation> allReservations = await this.context.Reservations.ToListAsync();
+
+            foreach (Reservation item in allReservations)
+            {
+                if (!item.IsCompatible(reservation))
+                {
+                    return this.BadRequest("You cannot book the room at this time");
+                }
+            }
+
             this.context.Entry(reservation).State = EntityState.Modified;
 
             try
@@ -114,6 +124,21 @@ namespace CancunHotelAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
         {
+            if (!reservation.IsValid())
+            {
+                return this.BadRequest("This reservation isn't valid");
+            }
+
+            List<Reservation> allReservations = await this.context.Reservations.ToListAsync();
+
+            foreach (Reservation item in allReservations)
+            {
+                if (!item.IsCompatible(reservation))
+                {
+                    return this.BadRequest("You cannot book the room at this time");
+                }
+            }
+
             this.context.Reservations.Add(reservation);
             await this.context.SaveChangesAsync();
 
@@ -142,6 +167,11 @@ namespace CancunHotelAPI.Controllers
             return this.NoContent();
         }
 
+        /// <summary>
+        /// Function that tells if a reservation has the given ID.
+        /// </summary>
+        /// <param name="id">Id to search.</param>
+        /// <returns>True if a reservation is registered with the given ID.</returns>
         private bool ReservationExists(long id)
         {
             return this.context.Reservations.Any(e => e.Id == id);
