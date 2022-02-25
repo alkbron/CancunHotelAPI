@@ -3,13 +3,19 @@
 // </copyright>
 
 using CancunHotelAPI.Models;
-using Microsoft.EntityFrameworkCore;
+using CancunHotelAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ReservationContext>(opt => opt.UseInMemoryDatabase("ReservationList"));
+
+builder.Services.Configure<ReservationsCancunDatabaseSettings>(
+    builder.Configuration.GetSection("ReservationsCancunDatabase"));
+
+builder.Services.AddSingleton<ReservationsService>();
+
+// builder.Services.AddDbContext<ReservationContext>(opt => opt.UseInMemoryDatabase("ReservationList"));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

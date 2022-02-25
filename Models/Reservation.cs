@@ -4,36 +4,36 @@
 
 namespace CancunHotelAPI.Models
 {
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
+
     /// <summary>
     /// Reservation Class.
     /// </summary>
     public class Reservation
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Reservation"/> class.
-        /// </summary>
-        public Reservation()
-        {
-        }
-
-        /// <summary>
         /// Gets or sets the reservation Id.
         /// </summary>
-        public long Id { get; set; }
+        [BsonId]
+        public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the beginnig date of the reservation.
         /// </summary>
+        [BsonElement("DateFrom")]
         public DateTime DateFrom { get; set; }
 
         /// <summary>
         /// Gets or sets the ending date of the reservation.
         /// </summary>
+        [BsonElement("DateTo")]
         public DateTime DateTo { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the customer.
         /// </summary>
+        [BsonElement("CustomerName")]
         public string? CustomerName { get; set; }
 
         /// <summary>
@@ -63,6 +63,11 @@ namespace CancunHotelAPI.Models
 
             if (other.IsValid())
             {
+                if (DateOnly.FromDateTime(this.DateFrom).DayNumber == DateOnly.FromDateTime(DateTime.Now).DayNumber)
+                {
+                    result = false;
+                }
+
                 if (this.DateFrom < other.DateFrom)
                 {
                     // THIS reservation is BEFORE the OTHER reservation
