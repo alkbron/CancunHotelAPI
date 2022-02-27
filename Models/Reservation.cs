@@ -1,5 +1,5 @@
 ﻿// <copyright file="Reservation.cs" company="ZiedADJOUDJ">
-// Copyright (c) Zied ADJOUDJ. All rights reserved.
+// Copyright (c) ZiedADJOUDJ. All rights reserved.
 // </copyright>
 
 namespace CancunHotelAPI.Models
@@ -52,7 +52,7 @@ namespace CancunHotelAPI.Models
         /// </summary>
         /// <param name="other">The reservation we want to check.</param>
         /// <returns>True if the 2 reservations are compatibles.</returns>
-        public bool IsCompatible (Reservation other)
+        public bool IsCompatible(Reservation other)
         {
             bool result = true;
 

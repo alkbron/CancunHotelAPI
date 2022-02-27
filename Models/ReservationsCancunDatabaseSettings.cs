@@ -1,9 +1,12 @@
-﻿// <copyright file="RervationsCancunDatabaseSettings.cs" company="ZiedADJOUDJ">
+﻿// <copyright file="ReservationsCancunDatabaseSettings.cs" company="ZiedADJOUDJ">
 // Copyright (c) ZiedADJOUDJ. All rights reserved.
 // </copyright>
 
 namespace CancunHotelAPI.Models
 {
+    /// <summary>
+    /// Database settings for reservations.
+    /// </summary>
     public class ReservationsCancunDatabaseSettings
     {
         /// <summary>

@@ -8,6 +8,9 @@ namespace CancunHotelAPI.Services
     using Microsoft.Extensions.Options;
     using MongoDB.Driver;
 
+    /// <summary>
+    /// Reservation service.
+    /// </summary>
     public class ReservationsService
     {
         /// <summary>
@@ -32,12 +35,27 @@ namespace CancunHotelAPI.Services
                 reservationsCancunDatabaseSettings.Value.ReservationsCollectionName);
         }
 
+        /// <summary>
+        /// Get all reservations from DB.
+        /// </summary>
+        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         public async Task<List<Reservation>> GetAsync() =>
             await this.reservationsCollection.Find(_ => true).ToListAsync();
 
+        /// <summary>
+        /// Gets one reservation from DB.
+        /// </summary>
+        /// <param name="id">ID of the reservation.</param>
+        /// <returns>The reservation chosen.</returns>
         public async Task<Reservation?> GetAsync(string id) =>
             await this.reservationsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+        /// <summary>
+        /// Inserts new reservation in DB.
+        /// </summary>
+        /// <param name="newReservation">The new reservation.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
+        /// <exception cref="ArgumentException">If the reservation is not valid.</exception>
         public async Task CreateAsync(Reservation newReservation)
         {
             if (!newReservation.IsValid())
@@ -58,6 +76,12 @@ namespace CancunHotelAPI.Services
             await this.reservationsCollection.InsertOneAsync(newReservation);
         }
 
+        /// <summary>
+        /// Updates reservation in database.
+        /// </summary>
+        /// <param name="id">ID of the reservation we want to update.</param>
+        /// <param name="updatedReservation">The new informations of the reservation.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task UpdateAsync(string id, Reservation updatedReservation)
         {
             if (!updatedReservation.IsValid())
@@ -78,6 +102,11 @@ namespace CancunHotelAPI.Services
             await this.reservationsCollection.ReplaceOneAsync(x => x.Id == id, updatedReservation);
         }
 
+        /// <summary>
+        /// Deletes a reservation in DB.
+        /// </summary>
+        /// <param name="id">ID of the reservation we want to delete.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public async Task DeleteAsync(string id) =>
             await this.reservationsCollection.DeleteOneAsync(x => x.Id == id);
     }
