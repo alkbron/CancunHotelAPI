@@ -69,7 +69,7 @@ namespace CancunHotelAPI.Services
 
             foreach (Reservation item in reservations)
             {
-                if (!item.IsCompatible(updatedReservation))
+                if (updatedReservation.Id != item.Id && !item.IsCompatible(updatedReservation))
                 {
                     throw new ArgumentException("There's no disponibility at this time");
                 }
