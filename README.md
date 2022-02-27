@@ -25,7 +25,7 @@ Une fois sur le swagger on peut tester les différentes features de l'Api, que n
 ### POST  
 `localhost:2525/api/Reservations` : reserve la chambre.
 ### PUT
-`localhost:2525/api/Reservations/$id` : change une reservation portant l'id donné pour la chambre
+`localhost:2525/api/Reservations/{id}` : change une reservation portant l'id donné pour la chambre
 
 Voici le modèle du JSON à passer dans le corps de la requête pour pouvoir reserver (POST), et modifier sa reservation (PUT): 
 ```json
@@ -37,7 +37,7 @@ Voici le modèle du JSON à passer dans le corps de la requête pour pouvoir res
 ```
 
 ### Delete
-DELETE `localhost:2525/api/Reservations/$id` : supprime une reservation portant l'id donné pour la chambre
+DELETE `localhost:2525/api/Reservations/{id}` : supprime une reservation portant l'id donné pour la chambre
 
 ## Détails pratique
 - Si vous voulez changer le port d'écoute de l'api, il suffit d'aller modifier le fichier `docker-compose.yml` et à la ligne 10 modifier le port. (Pour écouter sur le port 2526, on mettra à la ligne 10 `- 2526:80`)
