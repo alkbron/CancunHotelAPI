@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  apiHotel:
+    container_name: apihotel
+    image: apinet
+    build:
+      context: .
+      dockerfile: DockerfileNET
+    ports:
+      - 2525:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT:Development
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /home/ubuntu/apiAltenv2/CancunHotelAPI/db:/data/db
+    ports:
+      - 29019:27017
