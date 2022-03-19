@@ -25,6 +25,12 @@ namespace CancunHotelAPI.Controllers
         public async Task<List<Reservation>> Get() =>
             await this.reservationsService.GetAsync();
 
+
+        [HttpGet]
+        public async Task<List<string>> GetAllDaysReserved() =>
+            await this.reservationsService.GetAsyncAllDaysReserved();
+
+            
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Reservation>> Get(string id)
         {

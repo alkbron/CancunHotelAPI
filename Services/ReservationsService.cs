@@ -35,6 +35,19 @@ namespace CancunHotelAPI.Services
         public async Task<List<Reservation>> GetAsync() =>
             await this.reservationsCollection.Find(_ => true).ToListAsync();
 
+        public async Task<List<string>> GetAsyncAllDaysReserved() {
+            List<string> res = new List<string>();
+            List<Reservation> reservations = await this.reservationsCollection.Find(_ => true).ToListAsync();
+
+            foreach(Reservation item in reservations){
+                foreach(string date in item.GetAllDays()){
+                    res.Add(date);
+                }
+            }
+
+            return res;
+        }
+
         public async Task<Reservation?> GetAsync(string id) =>
             await this.reservationsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 

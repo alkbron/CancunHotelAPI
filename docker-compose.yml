@@ -8,8 +8,6 @@ services:
       dockerfile: DockerfileNET
     ports:
       - 2525:80
-    environment:
-      - ASPNETCORE_ENVIRONMENT:Development
   mongodb:
     image: mongo
     container_name: mongodb

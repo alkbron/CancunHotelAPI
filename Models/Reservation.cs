@@ -124,5 +124,15 @@ namespace CancunHotelAPI.Models
 
             return result;
         }
+
+        public List<string> GetAllDays(){
+            List<string> list = new List<string>();
+
+            for(DateTime dt = this.DateFrom; dt <= this.DateTo; dt = dt.AddDays(1)){
+                list.Add(dt.ToString("yyyy-MM-dd"));
+            }
+
+            return list;
+        }
     }
 }
