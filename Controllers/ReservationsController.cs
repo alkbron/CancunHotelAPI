@@ -6,6 +6,7 @@ namespace CancunHotelAPI.Controllers
 {
     using CancunHotelAPI.Models;
     using CancunHotelAPI.Services;
+    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using MongoDB.Bson;
 

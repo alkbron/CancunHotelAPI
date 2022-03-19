@@ -17,12 +17,22 @@ builder.Services.AddSingleton<ReservationsService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllOrigins",
+            builder =>
+            {
+                builder.WithOrigins("*");
+            });
+    });
+
 var app = builder.Build();
 
 // Swagger initialization
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseDeveloperExceptionPage();
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
