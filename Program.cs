@@ -14,14 +14,12 @@ builder.Services.Configure<ReservationsCancunDatabaseSettings>(
     builder.Configuration.GetSection("ReservationsCancunDatabase"));
 
 builder.Services.AddSingleton<ReservationsService>();
-
-// builder.Services.AddDbContext<ReservationContext>(opt => opt.UseInMemoryDatabase("ReservationList"));
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Swagger initialization
 app.UseSwagger();
 app.UseSwaggerUI();
 
